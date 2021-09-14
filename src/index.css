@@ -1,0 +1,15 @@
+:root {
+  --color-principal: rgb (0, 255, 300);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0px;
+  height: 672px;
+  font-family: 'Anton', sans-serif;
+}
+
+.titulo {
+  color: var(--color-principal);
+}
