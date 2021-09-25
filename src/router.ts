@@ -49,7 +49,7 @@ export function initRouter(conteiner: any) {
   }
 
   if (location.host.includes("github.io")) {
-    goTo("/Piedra-papel-o-tijera/welcome");
+    goTo("/Piedra-papel-o-tijera");
   } else {
     handleRoute(location.pathname);
   }
