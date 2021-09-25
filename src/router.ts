@@ -5,19 +5,23 @@ import { initResultsPage } from "./pages/results";
 
 const routes = [
   {
-    path: /\/welcome/,
+    path: /\/Piedra-papel-o-tijera/,
     component: initWelcomePage,
   },
   {
-    path: /\/instrucciones/,
+    path: /\/Piedra-papel-o-tijera\/welcome/,
+    component: initWelcomePage,
+  },
+  {
+    path: /\/Piedra-papel-o-tijera\/instrucciones/,
     component: initPlayPage,
   },
   {
-    path: /\/game/,
+    path: /\/Piedra-papel-o-tijera\/game/,
     component: initGamePage,
   },
   {
-    path: /\/results/,
+    path: /\/Piedra-papel-o-tijera\/results/,
     component: initResultsPage,
   },
 ];
