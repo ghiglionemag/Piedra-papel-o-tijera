@@ -1,5 +1,5 @@
 import { initWelcomePage } from "./pages/welcome";
-import { initPlayPage } from "./pages/play";
+import { initPlayPage } from "./pages/instrucciones";
 import { initGamePage } from "./pages/game";
 import { initResultsPage } from "./pages/results";
 
@@ -9,7 +9,7 @@ const routes = [
     component: initWelcomePage,
   },
   {
-    path: /\/play/,
+    path: /\/instrucciones/,
     component: initPlayPage,
   },
   {
@@ -34,17 +34,17 @@ export function initRouter(conteiner: any) {
 
     for (const r of routes) {
       if (r.path.test(route)) {
-        const el = r.component({goTo : goTo});
+        const el = r.component({ goTo: goTo });
 
         if (conteiner.firstChild) {
           conteiner.firstChild.remove(el);
         }
-       //conteiner.appendChild(el);
+        //conteiner.appendChild(el);
       }
     }
   }
 
-  if (location.pathname == "/") {
+  if (location.host.includes("github.io")) {
     goTo("/welcome");
   } else {
     handleRoute(location.pathname);

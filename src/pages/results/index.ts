@@ -1,15 +1,7 @@
+import { state } from "../../state";
+
 export function initResultsPage(conteiner) {
   const divEl = document.querySelector(".root");
-
-  divEl.innerHTML = `
-    <star-comp></star-comp>
-    <div class="score-conteiner"> 
-    <my-text tag="h2">Perdiste</my-text>
-    <my-text tag="p">Vos:${``}</my-text>
-    <my-text tag="p">Máquina:${``}</my-text>
-    </div>
-    <my-button class="re-starButton">Volver a jugar</my-button>
-    `;
 
   const style = document.createElement("style");
   style.innerText = `
@@ -34,13 +26,31 @@ export function initResultsPage(conteiner) {
     }
     `;
 
-    const buttonEl = divEl.querySelector(".re-starButton");
-    buttonEl.addEventListener("click", () => {
-      conteiner.goTo("/welcomes");
-    });
+  let result;
+  if (state.whoWins()) {
+    result = "win";
+  } else {
+    result = "loose";
+  }
 
-  divEl.appendChild(style);
-  return divEl;
+  divEl.innerHTML = `
+    <star-comp></star-comp>
+    <div class="score-conteiner"> 
+    <my-text tag="h2">Puntaje</my-text>
+    <my-text tag="p" id="your-scrore">Vos:${state.getScore().loose}</my-text>
+    <my-text tag="p" id="computer-scrore">Máquina:${
+      state.getScore().win
+    }</my-text>
+    </div>
+    <my-button class="re-starButton">Volver a jugar</my-button>
+    `;
 
+  const buttonReStartEl = divEl.querySelector(".re-starButton");
+  buttonReStartEl.addEventListener("click", () => {
+    conteiner.goTo("/welcome");
+  });
   
+  divEl.appendChild(style);
+  state.saveData;
+  return divEl;
 }

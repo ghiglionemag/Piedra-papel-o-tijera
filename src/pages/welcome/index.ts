@@ -29,7 +29,7 @@ s  `;
 
   const buttonEl = divEl.querySelector(".start-button");
   buttonEl.addEventListener("click", () => {
-    conteiner.goTo("/play");
+    conteiner.goTo("/instrucciones");
   });
 
   return divEl;

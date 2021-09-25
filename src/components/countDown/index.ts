@@ -63,8 +63,10 @@ export class CountDown extends HTMLElement {
     function onTimesUp() {
       clearInterval(timerInterval);
       divCountDown.innerHTML = `
+      <div class="root">
       <my-text tag="h2"> Se acabó tu tiempo</my-text>
       <my-button class="reinit-button"> Reiniciar<my-button>
+      </div>
       `;
 
       const button = divCountDown.querySelector(".reinit-button");
@@ -134,6 +136,14 @@ export class CountDown extends HTMLElement {
 
     const style = document.createElement("style");
     style.innerHTML = `
+    .root{ 
+      display: flex;
+      flex-direction: column; 
+      align-items: center;
+      justify-content: space-around;
+      
+  
+    }
     .base-timer {
         position: relative;
         width: 300px;

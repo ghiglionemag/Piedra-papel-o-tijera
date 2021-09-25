@@ -1,32 +1,24 @@
+import { initRouter } from "../../router";
+import { state } from "../../state";
+
 export class Options extends HTMLElement {
+  shadow: ShadowRoot;
+
   constructor() {
     super();
-    this.render();
+    this.shadow = this.attachShadow({ mode: "open" });
   }
-  render() {
-    const shadow = this.attachShadow({ mode: "open" });
 
-    const tijeraURL = require("url:../../img/tijeraImg.svg");
-    const piedraURL = require("url:../../img/piedraImg.svg");
-    const papelURL = require("url:../../img/papelImg.svg");
-
-    const divEl = document.createElement("div");
-    divEl.className = "root";
-
-    divEl.innerHTML = `
-    <div class="circle tijera"><img class="tijera-img" src=${tijeraURL}></div>
-    <div class="circle piedra"><img class="piedra-img" src=${piedraURL}></div>
-    <div class="circle papel"><img class="papel-img" src=${papelURL}></div>
-        `;
+  connectedCallback() {
     const style = document.createElement("style");
-    style.innerHTML = `
+    style.innerText = `
         .root{
           display: flex;
           flex-direction: row; 
           justify-content: space-between;
           width: 322px;
         }
-        .circle{
+        .option{
           background: #456BD9;
           border: 0.1875em solid #0F1C3F;
           border-radius: 50%;
@@ -35,9 +27,14 @@ export class Options extends HTMLElement {
           width: 100px;
           text-align: center;
           }
-        .tijera-img,
-        .piedra-img,
-        .papel-img{
+        .option:hover {
+          background: green;
+          height: 110px;
+          width: 110px;
+        }
+        .tijera,
+        .piedra,
+        .papel{
           height: 60px;
           width: 60px;
           padding: 15%;
@@ -46,8 +43,42 @@ export class Options extends HTMLElement {
         
             `;
 
-    shadow.appendChild(divEl);
-    shadow.appendChild(style);
+    this.shadow.appendChild(style);
+    this.render();
+  }
+  addListeners() {
+    const options = this.shadow.querySelectorAll(".option");
+    for (const option of options) {
+      option.addEventListener("click", (e) => {
+        const param = option.id;
+        const event = new CustomEvent("optionEvent", {
+          detail: {
+            type: param,
+          },
+        });
+        this.dispatchEvent(event);
+      });
+    }
+  }
+
+  render() {
+    const tijeraURL = require("url:../../img/tijeraImg.svg");
+    const piedraURL = require("url:../../img/piedraImg.svg");
+    const papelURL = require("url:../../img/papelImg.svg");
+
+    const divEl = document.createElement("div");
+    divEl.className = "root";
+
+    divEl.innerHTML = `
+    <button class="option" id= "tijera"><img class="tijera" src=${tijeraURL}></button>
+    <button class="option" id= "piedra"><img class="piedra" src=${piedraURL}></button>
+    <button class="option" id= "papel"><img class="papel" src=${papelURL}></button>
+        `;
+
+    this.shadow.appendChild(divEl);
+    if (location.pathname.includes("game")) {
+      this.addListeners();
+    }
   }
 }
 customElements.define("options-comp", Options);

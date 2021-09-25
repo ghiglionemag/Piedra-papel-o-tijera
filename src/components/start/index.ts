@@ -12,18 +12,29 @@ export class Star extends HTMLElement {
     divEl.className = "root";
 
     divEl.innerHTML = `
-    <img class="stars"  src=${startWinURL}>
-    <!---img class="stars"  src=${startLoseURL}--->
+    <img class="star"  src=${startWinURL}>
+    <my-text tag="h3" class="centered">Perdiste</my-text>
+    </img>
+    <!---img class="star"  src=${startLoseURL}--->
       `;
     const style = document.createElement("style");
     style.innerHTML = `
-      .stars{
-        width: 254px;
+      .root{
+        text-align: center;
+        position: relative;
+      }
+      .star{
+        width: 259px;
         height: 259px;
+      }
+      .centered {
+        position: absolute;
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
           `;
 
-    //button.textContent = this.textContent;
 
     shadow.appendChild(divEl);
     shadow.appendChild(style);

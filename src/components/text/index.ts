@@ -21,12 +21,10 @@ export class Text extends HTMLElement {
       line-height: 61px;
       font-weight: bold;
       padding: 0px 30px;
-      background-color: green;
     }
     h2{
      font-size: 55px;
      line-height: 61px;
-     background-color: green;
      margin: 0px;
     }
     h3{
